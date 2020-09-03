@@ -8,8 +8,10 @@ df = pd.read_excel(r'\\AENBACIFS01.gaston.local\vol_tacdata1\data\Project Execut
 
 
 df['Combined'] = df['SYSTEM'].astype(str)+'\\'+df['Part No.']
+# fill nan with ''
+df = df.fillna('')
 
-print (df)
+
 
 path_to_dwgs = r'\\AENBACIFS01.gaston.local\vol_tacdata1\data\Project Execution\0646 Marghera\07 GT Engineering\04 Piping and Arrangement (3D)\Pipe Support dwg - approved'
 
@@ -38,4 +40,13 @@ listOfFiles = getListOfFiles(path_to_dwgs)
 for (index_label, row_series) in df.iterrows():
    print('Row Index label : ', index_label)
    # print('Row Content as Series : ', row_series.values)
-   print (row_series[7])
+   current_row_data = row_series[8]
+   print (current_row_data)
+   for current_file_path in listOfFiles:
+       if current_file_path.find(current_row_data) > 0:
+           print ('file found')
+           # CHECK HOW TO WRITE RESULT TO DF!!
+           df.at[index_label, 'File Downloaded'] = "YES"
+           
+
+print (df)
