@@ -50,3 +50,8 @@ for (index_label, row_series) in df.iterrows():
            
 
 print (df)
+
+
+writer = pd.ExcelWriter(r'\\AENBACIFS01.gaston.local\vol_tacdata1\data\Project Execution\0646 Marghera\07 GT Engineering\04 Piping and Arrangement (3D)\Pipe Support dwg - approved\0646 S85100AF002 01 - JO RedCorrex.xlsx')
+df.to_excel(writer, sheet_name='Sheet2')
+writer.save
